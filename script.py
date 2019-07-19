@@ -36,9 +36,15 @@ while(True):
         fichier=open('./ImageISS.jpg', 'rb')
         api = twitter.Api(consumer_key=config['consumer_key'],consumer_secret=config['consumer_secret'],access_token_key=config['access_token_key'],access_token_secret=config['access_token_secret'])
         api.UpdateProfile(location="lat: {} | lon: {}".format(lat, lon), description="Hi, my name is Neil. I've been created to celebrate the 50th anniversary of the moon landing the 21th of July 2019.\nHere is my creator: @MrAnyx")
-        status = api.PostUpdate("It's {hour}:{minute}:{second} and the International Space Station is actually here: lat: {latitude}, lon: {longitude}.\nIt's 400 Km above : {message}".format(hour=datetime.utcnow().hour, minute=datetime.utcnow().minute, second=datetime.utcnow().second, latitude=lat, longitude=lon, message=message), media=fichier)
+
+        hour = "%02d" % datetime.utcnow().hour
+        minute = "%02d" % datetime.utcnow().minute
+        second = "%02d" % datetime.utcnow().second
+
+
+        status = api.PostUpdate("It's {hour}:{minute}:{second} and the International Space Station is actually here: lat: {latitude}, lon: {longitude}.\nIt's 400 Km above : {message}".format(hour=hour, minute=minute, second=second, latitude=lat, longitude=lon, message=message), media=fichier)
         fichier.close()
 
-        print("[INFO] La position de l'ISS a été postée à {hour}:{minute}:{second}".format(hour=datetime.utcnow().hour, minute=datetime.utcnow().minute, second=datetime.utcnow().second))
+        print("[INFO] La position de l'ISS a été postée à {hour}:{minute}:{second}".format(hour=hour, minute=minute, second=second))
 
         time.sleep(10)
