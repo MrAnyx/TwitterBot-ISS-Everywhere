@@ -6,13 +6,12 @@ import twitter
 from geopy.geocoders import Nominatim
 import time
 from datetime import datetime
-
 from config import config
 
 
 
 while(True):
-    if(datetime.utcnow().hour in [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23] and datetime.utcnow().minute == 33 and datetime.utcnow().second == 45):
+    if(datetime.utcnow().hour in [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23] and datetime.utcnow().minute == 0 and datetime.utcnow().second == 0):
         """ get the coords"""
         response = requests.get('http://api.open-notify.org/iss-now.json')
         resJson = json.loads(response.content.decode('utf-8'))
@@ -37,7 +36,9 @@ while(True):
         fichier=open('./ImageISS.jpg', 'rb')
         api = twitter.Api(consumer_key=config['consumer_key'],consumer_secret=config['consumer_secret'],access_token_key=config['access_token_key'],access_token_secret=config['access_token_secret'])
         api.UpdateProfile(location="lat: {} | lon: {}".format(lat, lon), description="Hi, my name is Neil. I've been created to celebrate the 50th anniversary of the moon landing the 19th of July 2019.\nHere is my creator: @MrAnyx")
-        status = api.PostUpdate("It's {hour}:{minute}:{second} and the International Space Station is actually here: lat: {latitude}, lon: {longitude}.\nIt's 400 Km above : {message}".format(hour=date.utcnow().hour, minute=date.utcnow().minute, second=date.utcnow().second, latitude=lat, longitude=lon, message=message), media=fichier)
+        status = api.PostUpdate("It's {hour}:{minute}:{second} and the International Space Station is actually here: lat: {latitude}, lon: {longitude}.\nIt's 400 Km above : {message}".format(hour=datetime.utcnow().hour, minute=datetime.utcnow().minute, second=datetime.utcnow().second, latitude=lat, longitude=lon, message=message), media=fichier)
         fichier.close()
+
+        print("[INFO] La position de l'ISS a été postée à {hour}:{minute}:{second}".format(hour=datetime.utcnow().hour, minute=datetime.utcnow().minute, second=datetime.utcnow().second))
 
         time.sleep(10)
