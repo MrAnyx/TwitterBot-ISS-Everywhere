@@ -47,4 +47,4 @@ while(True):
 
         print("[INFO] La position de l'ISS a été postée à {hour}:{minute}:{second}".format(hour=hour, minute=minute, second=second))
 
-        time.sleep(10)
+        time.sleep(3300)
