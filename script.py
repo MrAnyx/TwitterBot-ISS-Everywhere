@@ -42,7 +42,7 @@ while(True):
         second = "%02d" % datetime.utcnow().second
 
 
-        status = api.PostUpdate("It's {hour}:{minute} and the International Space Station is actually here:\nlat: {latitude}\nlon: {longitude}\nIt's 400 Km above : {message}".format(hour=hour, minute=minute, latitude=lat, longitude=lon, message=message), media=fichier)
+        status = api.PostUpdate("It's {hour}:{minute} and the International Space Station is actually here:\nlat: {latitude}\nlon: {longitude}\nIt's 400 Km above : {message}\n#Apollo50th #NASA #Apollo #Space #Moon #ISS".format(hour=hour, minute=minute, latitude=lat, longitude=lon, message=message), media=fichier)
         fichier.close()
 
         print("[INFO] La position de l'ISS a été postée à {hour}:{minute}:{second}".format(hour=hour, minute=minute, second=second))
